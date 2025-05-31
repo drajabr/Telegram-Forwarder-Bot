@@ -38,15 +38,15 @@ class Chat:
         chats_list = []
         for chat in chats:
             chat_type = "UNKNOWN"
-            if chat.is_channel:
+            if hasattr(chat, "is_channel") and chat.is_channel:
                 chat_type = "Channel"
-            elif chat.is_group:
+            elif hasattr(chat, "is_group") and chat.is_group:
                 chat_type = "Group"
-            elif chat.is_user:
+            elif hasattr(chat, "is_user") and chat.is_user:
                 chat_type = "User"
 
-            username = chat.entity.username
-            access_hash = chat.entity.access_hash
+            username = getattr(chat.entity, "username", None)
+            access_hash = getattr(chat.entity, "access_hash", None)
 
             chat_dict = {
                 "id": chat.id,
