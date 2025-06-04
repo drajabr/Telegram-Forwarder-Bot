@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-forwarder-bot
+    volumes:
+      - ./resources:/app/resources
+      - ./sessions:/app/sessions
+      - ./media:/app/media
+    environment:
+      API_ID: "123456"
+      API_HASH: "abc123yourhash"
+      PHONE_NUMBER: "+1234567890"
+    restart: unless-stopped
